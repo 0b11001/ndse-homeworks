@@ -1,0 +1,14 @@
+{
+  "name": "task-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^17.3.0"
+  },
+  "bin": {
+    "task-1": "./index.js"
+  }
+}
