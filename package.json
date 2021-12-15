@@ -1,0 +1,23 @@
+{
+  "name": "005-hhtp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0b11001/ndse-homeworks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0b11001/ndse-homeworks/issues"
+  },
+  "homepage": "https://github.com/0b11001/ndse-homeworks#readme",
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
