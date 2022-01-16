@@ -1,0 +1,26 @@
+{
+  "name": "006-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0b11001/ndse-homeworks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0b11001/ndse-homeworks/issues"
+  },
+  "homepage": "https://github.com/0b11001/ndse-homeworks#readme"
+}
