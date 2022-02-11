@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 let count = 0;
 
 class Book {
@@ -10,10 +12,10 @@ class Book {
     fileName,
     fileBook,
   } = {}) {
-    this.id = String(count++);
-    this.title = title || "Book " + this.id;
-    this.description = description || "";
-    this.authors = authors || "";
+    this.id = String(++count);
+    this.title = (title && title.trim()) || "Book " + this.id;
+    this.description = (description && description.trim()) || "";
+    this.authors = (authors && authors.trim()) || "";
     this.favorite = favorite || "";
     this.fileCover = fileCover || "";
     this.fileName = fileName || "";
@@ -29,14 +31,24 @@ class Book {
     fileName,
     fileBook,
   }) {
-    this.title = title !== undefined ? title : this.title;
+    this.title = title !== undefined ? title.trim() : this.title;
     this.description =
-      description !== undefined ? description : this.description;
-    this.authors = authors !== undefined ? authors : this.authors;
+      description !== undefined ? description.trim() : this.description;
+    this.authors = authors !== undefined ? authors.trim() : this.authors;
     this.favorite = favorite !== undefined ? favorite : this.favorite;
     this.fileCover = fileCover !== undefined ? fileCover : this.fileCover;
     this.fileName = fileName !== undefined ? fileName : this.fileName;
     this.fileBook = fileBook !== undefined ? fileBook : this.fileBook;
+  }
+
+  destroy() {
+    const { fileBook, fileCover } = this;
+    if (fileCover && fs.existsSync(fileCover)) {
+      fs.rmSync(fileCover);
+    }
+    if (fileBook && fs.existsSync(fileBook)) {
+      fs.rmSync(fileBook);
+    }
   }
 }
 

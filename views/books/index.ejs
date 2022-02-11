@@ -1,0 +1,45 @@
+<%- include('../parts/layout-header', { title: title }) %>
+
+<div class="container">
+  <% if (books.length) { %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% books.forEach((book, index) => { %>
+      <tr>
+        <td class="w-1"><%= index + 1 %></td>
+        <td class="w-100"><%= book.title %></td>
+        <td>
+          <div class="btn-group btn-group-sm" role="group">
+            <a href="/books/<%= book.id %>" class="btn btn-outline-primary"
+              >View</a
+            >
+            <a
+              href="/books/update/<%= book.id %>"
+              class="btn btn-outline-primary"
+              >Edit</a
+            >
+            <a
+              href="/books/delete/<%= book.id %>"
+              class="btn btn-outline-danger"
+              >Delete</a
+            >
+          </div>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+  <div>
+    <a href="/books/create" class="btn btn-success">Create Book</a>
+  </div>
+</div>
+
+<%- include('../parts/layout-footer') %>

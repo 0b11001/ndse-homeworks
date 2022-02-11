@@ -1,13 +1,22 @@
 const express = require("express");
-const userRouter = require("./routes/user");
+const indexRouter = require("./routes/index");
 const booksRouter = require("./routes/books");
+const userApiRouter = require("./routes/api/user");
+const booksApiRouter = require("./routes/api/books");
+const errorMiddleware = require("./middleware/error");
 
 const app = express();
 
 app.use(express.json());
+app.use(express.static("public"));
+app.set("view engine", "ejs");
 
-app.use("/api/user", userRouter);
-app.use("/api/books", booksRouter);
+app.use("/", indexRouter);
+app.use("/books", booksRouter);
+app.use("/api/user", userApiRouter);
+app.use("/api/books", booksApiRouter);
+
+app.use(errorMiddleware);
 
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`);

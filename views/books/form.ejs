@@ -1,0 +1,76 @@
+<form id="book-form" method="POST" enctype="multipart/form-data">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input class="form-control" type="text" id="title" name="title" <%=
+          readonly ? 'disabled' : '' %> value="<%= book.title %>" />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" name="description" <%=
+          readonly ? 'disabled' : '' %>><%= book.description %></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="authors" class="form-label">Authors</label>
+          <input class="form-control" type="text" id="authors" name="authors"
+          <%= readonly ? 'disabled' : '' %> value="<%= book.authors %>" />
+        </div>
+        <div class="mb-3 form-check">
+          <input class="form-check-input" type="checkbox" id="favorite"
+          name="favorite" <%= readonly ? 'disabled' : '' %> checked="<%=
+          book.favorite %>" />
+          <label class="form-check-label" for="favorite">Favorite</label>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="cover" class="form-label">Cover</label>
+          <% if (!readonly) { %>
+          <input
+            type="file"
+            class="form-control"
+            id="cover"
+            name="fileCover"
+            title="<%= book.fileCover %>"
+          />
+          <% } else { %>
+          <div class="mb-3">
+            <img
+              class="img-thumbnail"
+              width="180"
+              height="180"
+              src="<%= book.fileCover ? book.fileCover.replace(/.*\/public\//, '/') : ' ' %>"
+            />
+          </div>
+          <% } %>
+        </div>
+        <div class="mb-3">
+          <label for="file" class="form-label">Book File</label>
+          <div>
+            <% if (!readonly) { %>
+              <input
+                type="file"
+                class="form-control"
+                id="cover"
+                name="fileBook"
+                title="<%= book.fileBook %>"
+              />
+            <% } else if (book.fileBook) { %>
+              <a
+                href="/books/download/<%= book.id %>"
+                class="btn btn-outline-secondary"
+                title="<%= book.fileBook%>"
+                download
+                >↓ Download</a
+              >
+            <% } else { %>
+              <small>no book file yet</small>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

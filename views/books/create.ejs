@@ -1,0 +1,11 @@
+<%- include('../parts/layout-header', { title: title }) %>
+
+<main>
+  <%- include('./form', { readonly: false }) %>
+  <div class="container">
+    <a href="/books" class="btn btn-outline-secondary">← Cancel</a>
+    <button type="submit" form="book-form" class="btn btn-success">Save</button>
+  </div>
+</main>
+
+<%- include('../parts/layout-footer') %>
