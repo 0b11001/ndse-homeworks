@@ -18,6 +18,7 @@ app.use("/api/books", booksApiRouter);
 
 app.use(errorMiddleware);
 
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:3000`);
 });
