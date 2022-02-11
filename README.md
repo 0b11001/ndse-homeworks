@@ -22,3 +22,7 @@
 
 #### Задание 3
 По пошаговой [инструкции](heroku.md) опубликовать проект из *задания 2* на Heroku.
+
+---
+
+Приложение на Heroku: [https://ejs-0b11001.herokuapp.com](https://ejs-0b11001.herokuapp.com)
