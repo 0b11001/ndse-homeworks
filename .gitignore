@@ -1,3 +1,4 @@
 .idea
 node_modules
-public/*
+counter/db/counter.json
+library/db/books.json

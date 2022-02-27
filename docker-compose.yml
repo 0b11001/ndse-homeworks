@@ -1,0 +1,21 @@
+version: "3"
+services:
+  library:
+    build: ./library
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./library/db:/app/db
+    links:
+      - counter
+    environment:
+      - DB_PATH=/app/db
+      - COUNTER_URL=http://counter:3001
+  counter:
+    build: ./counter
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./counter/db:/app/db
+    environment:
+      - DB_PATH=/app/db

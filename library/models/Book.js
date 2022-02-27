@@ -1,4 +1,7 @@
 const fs = require("fs");
+const axios = require("axios");
+
+const COUNTER_URL = process.env.COUNTER_URL || "http://localhost:3001";
 
 let count = 0;
 
@@ -49,6 +52,32 @@ class Book {
     if (fileBook && fs.existsSync(fileBook)) {
       fs.rmSync(fileBook);
     }
+  }
+
+  async getData() {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      authors: this.authors,
+      favorite: this.favorite,
+      fileCover: this.fileCover,
+      fileName: this.fileName,
+      fileBook: this.fileBook,
+      viewsCount: await this.viewsCount,
+    };
+  }
+
+  get viewsCount() {
+    return axios
+      .get(`${COUNTER_URL}/counter/${this.id}`)
+      .then((result) => result.data);
+  }
+
+  async incrViewsCount() {
+    return axios
+      .post(`${COUNTER_URL}/counter/${this.id}/incr`)
+      .then((res) => res.data);
   }
 }
 

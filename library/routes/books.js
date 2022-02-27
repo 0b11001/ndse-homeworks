@@ -51,13 +51,14 @@ router.post(
   }
 );
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const book = books.get(req.params.id);
   if (book) {
+    await book.incrViewsCount();
     res.render("books/view", {
       title: "Book",
       page: "books",
-      book: book,
+      book: await book.getData(),
     });
   } else {
     res.status(404).redirect("/404");

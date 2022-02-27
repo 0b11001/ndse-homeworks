@@ -1,0 +1,20 @@
+<%- include('../parts/layout-header', { title: title }) %>
+
+<main>
+  <%- include('./form', { readonly: true }) %>
+  <div class="container mb-1">
+    <div class="row">
+      <div class="col-4">
+        <a href="/books/update/<%= book.id %>" class="btn btn-primary">Edit</a>
+        <a href="/books/delete/<%= book.id %>" class="btn btn-danger">Delete</a>
+      </div>
+      <div class="col-4">
+        <div class="d-flex align-items-center justify-content-end h-100">
+          <small>Просмотров: <%= book.viewsCount %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../parts/layout-footer') %>
