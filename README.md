@@ -1,28 +1,33 @@
-# Домашнее задание к занятию «2.5 База данных и хранение данных»
+```js
+db.books.insertMany([
+  {
+    title: "Dream Town",
+    description:
+      "Archer, Dash and Callahan search for a missing screenwriter who had a dead body turn up in her home.",
+    authors: "David Baldacci",
+  },
+  {
+    title: "Beautiful",
+    description:
+      "A supermodel deals with the effects of a terror attack at an airport in Brussels on her life and appearance.",
+    authors: "Danielle Steel",
+  },
+]);
+```
 
-**Правила выполнения домашней работы:** 
-* Выполняйте домашнее задание в отдельной ветке проекта на гитхабе.
-* В поле для сдачи работы прикрепите ссылку на ваш проект в Git.
-* Присылать на проверку можно каждую задачу по отдельности или все задачи вместе. 
-* Во время проверки по частям ваша домашняя работа будет со статусом «На доработке».
-* Любые вопросы по решению задач задавайте в Slack.
+```js
+db.books.find({ title: { $regex: ".*text.*", $options: "i" } });
+```
 
-
-#### Задание 1
-Чтобы в будущем вам было легче работать с **MongoDB**, изучите раздел 
-документации про использование [**CRUD Operations**](https://docs.mongodb.com/manual/crud/)
-
-#### Задание 2
-В файле **README.md** написать следующие запросы для **MongoDB**:
- - запрос(ы) для *вставки* данных минимум о двух книгах в коллекцию **books**
- - запрос для *поиска* полей документов коллекции **books** по полю *title*
- - запрос для *редактирования* полей: *description* и *authors* коллекции **books** по *_id* записи
- 
-*Каждый документ коллекции **books** должен содержать следующую структуру данных: 
-```javascript
-{
-  title: "string",
-  description: "string",
-  authors: "string"
-}
-``` 
+```js
+db.books.updateOne(
+  { _id: "ObjectId(...)" },
+  {
+    $set: {
+      description:
+        "A battered wife raised in a violent home attempts to halt the cycle of abuse.",
+      authors: "Colleen Hoover",
+    },
+  }
+);
+```
