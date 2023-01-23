@@ -41,7 +41,7 @@
               class="img-thumbnail"
               width="180"
               height="180"
-              src="<%= book.fileCover ? book.fileCover.replace(/.*\/public\//, '/') : ' ' %>"
+              src="<%= book.fileCover ? book.fileCover.replace(/.*(\/|\\)public(\/|\\)/, '/') : ' ' %>"
             />
           </div>
           <% } %>

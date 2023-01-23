@@ -7,6 +7,7 @@ let count = 0;
 
 class Book {
   constructor({
+    _id,
     title,
     description,
     authors,
@@ -15,7 +16,7 @@ class Book {
     fileName,
     fileBook,
   } = {}) {
-    this.id = String(++count);
+    this.id = _id || String(++count);
     this.title = (title && title.trim()) || "Book " + this.id;
     this.description = (description && description.trim()) || "";
     this.authors = (authors && authors.trim()) || "";
@@ -69,15 +70,17 @@ class Book {
   }
 
   get viewsCount() {
-    return axios
-      .get(`${COUNTER_URL}/counter/${this.id}`)
-      .then((result) => result.data);
+    return 0;
+    // return axios
+    //   .get(`${COUNTER_URL}/counter/${this.id}`)
+    //   .then((result) => result.data);
   }
 
   async incrViewsCount() {
-    return axios
-      .post(`${COUNTER_URL}/counter/${this.id}/incr`)
-      .then((res) => res.data);
+    return 0;
+    // return axios
+    //   .post(`${COUNTER_URL}/counter/${this.id}/incr`)
+    //   .then((res) => res.data);
   }
 }
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const books = require("../db/books");
+const books = require("../db/mongobooks");
 const storage = require("../middleware/storage");
 
 const router = express.Router();
@@ -7,11 +7,11 @@ const router = express.Router();
 const getFilePath = (files, name) =>
   files && files[name] && files[name][0] ? files[name][0].path : undefined;
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   res.render("books/index", {
     title: "Books List",
     page: "books",
-    books: books.all(),
+    books: await books.all(),
   });
 });
 
@@ -33,12 +33,12 @@ router.post(
       name: "fileCover",
     },
   ]),
-  (req, res) => {
+  async (req, res) => {
     const { title, description, authors, favorite } = req.body;
     const fileBook = getFilePath(req.files, "fileBook");
     const fileCover = getFilePath(req.files, "fileCover");
 
-    const book = books.create({
+    const book = await books.create({
       title,
       description,
       authors,
@@ -52,7 +52,7 @@ router.post(
 );
 
 router.get("/:id", async (req, res) => {
-  const book = books.get(req.params.id);
+  const book = await books.get(req.params.id);
   if (book) {
     await book.incrViewsCount();
     res.render("books/view", {
@@ -65,8 +65,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/update/:id", (req, res) => {
-  const book = books.get(req.params.id);
+router.get("/update/:id", async (req, res) => {
+  const book = await books.get(req.params.id);
   if (book) {
     res.render("books/update", {
       title: "Update Book",
@@ -88,13 +88,13 @@ router.post(
       name: "fileCover",
     },
   ]),
-  (req, res) => {
+  async (req, res) => {
     const { id } = req.params;
     const { title, description, authors, favorite } = req.body;
     const fileBook = getFilePath(req.files, "fileBook");
     const fileCover = getFilePath(req.files, "fileCover");
 
-    const book = books.update(id, {
+    const book = await books.update(id, {
       title,
       description,
       authors,
@@ -111,9 +111,9 @@ router.post(
   }
 );
 
-router.get("/download/:id", (req, res) => {
+router.get("/download/:id", async (req, res) => {
   const { id } = req.params;
-  const book = books.get(id);
+  const book = await books.get(id);
   if (book) {
     res.download(book.fileBook, (err) => {
       if (err) {
@@ -125,8 +125,8 @@ router.get("/download/:id", (req, res) => {
   }
 });
 
-router.get("/delete/:id", (req, res) => {
-  const book = books.delete(req.params.id);
+router.get("/delete/:id", async (req, res) => {
+  const book = await books.delete(req.params.id);
   if (book) {
     res.redirect("/books");
   } else {
